@@ -15,6 +15,6 @@ lojas = df_lojas['Loja'].unique()
 loja = st.sidebar.selectbox("Loja", lojas)
 
 st.markdown(f"# {loja}")
-
+st.divider()
 df_lojas
 df_vendas
