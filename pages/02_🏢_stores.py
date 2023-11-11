@@ -9,3 +9,6 @@ df_lojas
 
 df_vendas = pd.read_excel(r"C:\Users\aluno\Documents\project python\database\Vendas.xlsx")
 df_vendas
+
+lojas = df_lojas['Loja'].unique()
+loja = st.sidebar.selectbox("Loja", lojas)
