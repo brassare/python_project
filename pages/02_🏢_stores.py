@@ -11,10 +11,18 @@ df_lojas = pd.read_csv(r"C:\Users\aluno\Documents\project python\database\Lojas.
 df_vendas = pd.read_excel(r"C:\Users\aluno\Documents\project python\database\Vendas.xlsx")
 
 
+df_vendas = pd.merge(df_vendas, df_lojas, on="ID Loja", how="left")
+df_vendas = df_vendas.reset_index()
+
+df_vendas = df_vendas.drop(['Código Venda', 'ID Loja'], axis=1)
+
+
 lojas = df_lojas['Loja'].unique()
 loja = st.sidebar.selectbox("Loja", lojas)
 
 st.markdown(f"# {loja}")
 st.divider()
-df_lojas
+
+df_vendas = df_vendas[df_vendas["Loja"] == loja]
+#df_lojas 
 df_vendas
