@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from utils import leitura_de_dados
+from datetime import datetime
+import plotly.express as px
 
 st.set_page_config(page_title="stores", page_icon="🏢", layout= "wide")
 
@@ -44,6 +46,24 @@ col2.markdown(f"#### Ticket Médio R$: {tkt_medio_total:.2f}")
 col3,col4 = st.columns(2)
 col3.markdown(f"#### Faturamento LOja R$: {faturament_loja/1000:.2f} milhões")
 col4.markdown(f"#### Ticket Médio R$: {tkt_medio_loja:.2f}")
+
+st.divider()
+
+#Converter e formatar dados temporais 
+df_data_filtered['Data'] = pd.to_datetime(df_data_filtered['Data'],format='%d%m%Y')
+df_data_filtered['Mês/Ano'] = df_data_filtered['Data'].dt.to_period('M')
+df_data_filtered['Mês/Ano'] = df_data_filtered['Mês/Ano'].dt.strftime('%Y-%m')
+
+#Agrupo dados por mês/ano e calcula faturamento mensal
+df_faturamento_mensal = df_data_filtered.groupby('Mês/Ano')['Valor Final'].sum().reset_index()
+
+#Criar o grafico de linha utilizando o plotly.express
+fig = px.line(df_faturamento_mensal, x= 'Mês/Ano', y='Valor Final', title=f'Faturamento mensal da loja {lojas}')
+fig.update_xaxes(title_text='Mês/Ano')
+fig.update_yaxes(title_text='Faturamento')
+
+#Exibir o grafico 
+st.plotly_chart(fig)
 
 st.divider()
  
