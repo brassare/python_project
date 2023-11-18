@@ -35,10 +35,16 @@ tkt_medio_total = faturamento_total / quantidade_total
 
 faturament_loja = df_data_filtered['Valor Final'].sum()
 quantidade_loja = df_data_filtered['Quantidade'].sum()
-tkt_medio_total = faturamento_total / quantidade_total
+tkt_medio_loja = faturamento_total / quantidade_total
  
 col1, col2 = st.columns(2) 
-col1.markdown(f"##### Faturamento Grupo R$: {faturamento_total/1000:.2f} milhões")
-col2.markdown(f"##### Ticket Médio R$: {tkt_medio_total:.2f}")
+col1.markdown(f"#### Faturamento Grupo R$: {faturamento_total/1000:.2f} milhões")
+col2.markdown(f"#### Ticket Médio R$: {tkt_medio_total:.2f}")
+ 
+col3,col4 = st.columns(2)
+col3.markdown(f"#### Faturamento LOja R$: {faturament_loja/1000:.2f} milhões")
+col4.markdown(f"#### Ticket Médio R$: {tkt_medio_loja:.2f}")
+
+st.divider()
  
 st.dataframe(df_data_filtered)
