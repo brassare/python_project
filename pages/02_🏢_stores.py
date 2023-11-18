@@ -1,14 +1,15 @@
 import streamlit as st
 import pandas as pd
+from utils import leitura_de_dados
 
 st.set_page_config(page_title="stores", page_icon="🏢", layout= "wide")
 
+# Leitura dos dados de utils
+leitura_de_dados()
 
-df_lojas = pd.read_csv(r"C:\Users\aluno\Documents\project python\database\Lojas.csv", sep=";", encoding="latin1", index_col="ID Loja", parse_dates= True)
-
-
-
-df_vendas = pd.read_excel(r"C:\Users\aluno\Documents\project python\database\Vendas.xlsx")
+#Carregar dataframes da sessão 
+df_vendas = st.session_state['dados']['df_vendas']
+df_lojas = st.session_state['dados']['df_lojas']
 
 # Lionha de codigo para realizar a junção do ID da loja 
 df_vendas = pd.merge(df_vendas, df_lojas, on="ID Loja", how="left")
