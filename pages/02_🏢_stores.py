@@ -65,6 +65,7 @@ fig.update_yaxes(title_text='Faturamento')
 #Exibir o grafico 
 st.plotly_chart(fig)
 
+#divisor
 st.divider()
  
 st.dataframe(df_data_filtered)
