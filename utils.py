@@ -8,3 +8,4 @@ def leitura_de_dados():
         dados = {'df_vendas' : df_vendas,
                  'df_lojas' : df_lojas}
         st.session_state['dados'] = dados
+
